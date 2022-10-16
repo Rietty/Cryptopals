@@ -8,6 +8,10 @@ mod utility;
 use cryptography::*;
 use utility::*;
 
+// Import standard libraries
+use std::fs::File;
+use std::io::{self, BufRead};
+
 // Main function.
 fn main() {
     // Run the tests.
@@ -68,6 +72,44 @@ fn run_set_1() {
 
     // Print the key and string.
     println!("Set 1, Challenge 3: {}", best_string);
+
+    // Challenge 4.
+    // Need to find the line that produces the most readable string, single byte XOR cipher.
+    // Same as challenge 3, but with a file of hex strings instead of a single hex string.
+    let mut best_score: f32 = 0.0;
+    let mut best_string = String::new();
+
+    // Create a new reader and open the file.
+    let file = File::open("data/s1c4.txt");
+    let reader = io::BufReader::new(file.unwrap());
+
+    // Loop through the lines.
+    for line in reader.lines().flatten() {
+        // Loop through all the possible keys.
+        for key in 0..255 {
+            // Get the bytes from the hex string.
+            let bytes = hex_string_to_bytes(&line);
+
+            // Use xor function to decode the bytes.
+            let decoded_bytes = xor(&bytes, &[key]);
+
+            // Convert the bytes to a string.
+            let decoded_string = bytes_to_string(&decoded_bytes);
+
+            // Get the score for the string.
+            let score = score_english_text(&decoded_string);
+
+            // Check if the score is better than the best score.
+            if score > best_score {
+                // Update the best score and key.
+                best_score = score;
+                best_string = decoded_string;
+            }
+        }
+    }
+
+    // Print the key and string.
+    print!("Set 1, Challenge 4: {}", best_string);
 
     // Challenge 5.
     println!(
