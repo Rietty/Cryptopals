@@ -40,7 +40,6 @@ fn run_set_1() {
     // Challenge 3.
     // Need to find the key that produces the most readable string, single byte XOR cipher.
     let mut best_score: f32 = 0.0;
-    let mut best_key = 0;
     let mut best_string = String::new();
 
     // Loop through all the possible keys.
@@ -63,16 +62,12 @@ fn run_set_1() {
         if score > best_score {
             // Update the best score and key.
             best_score = score;
-            best_key = key;
             best_string = decoded_string;
         }
     }
 
     // Print the key and string.
-    println!(
-        "Set 1, Challenge 3: Key - {}, String - {}",
-        best_key, best_string
-    );
+    println!("Set 1, Challenge 3: {}", best_string);
 
     // Challenge 5.
     println!(
