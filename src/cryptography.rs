@@ -30,6 +30,42 @@ pub fn hex_string_to_bytes(hex: &str) -> Vec<u8> {
     bytes
 }
 
+// Function to print a byte array as a hex string.
+pub fn bytes_to_hex_string(bytes: &[u8]) -> String {
+    // Create a new string to store the hex in.
+    let mut hex = String::new();
+
+    // Loop through the bytes.
+    for byte in bytes {
+        // Convert the byte to a hex string.
+        let hex_byte = format!("{:02x}", byte);
+
+        // Add the hex string to the string.
+        hex.push_str(&hex_byte);
+    }
+
+    // Return the string.
+    hex
+}
+
+// XOR two byte arrays together.
+pub fn xor_bytes(bytes1: &[u8], bytes2: &[u8]) -> Vec<u8> {
+    // Create a new vector to store the bytes in.
+    let mut bytes: Vec<u8> = Vec::new();
+
+    // Loop through the bytes.
+    for i in 0..bytes1.len() {
+        // XOR the bytes together.
+        let byte = bytes1[i] ^ bytes2[i];
+
+        // Add the byte to the vector.
+        bytes.push(byte);
+    }
+
+    // Return the vector.
+    bytes
+}
+
 // Function that will take a byte array and encode it into a base64 string.
 pub fn bytes_to_base64(bytes: &Vec<u8>) -> String {
     // Create a new string to store the base64 string in.
