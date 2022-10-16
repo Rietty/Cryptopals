@@ -30,6 +30,27 @@ pub fn hex_string_to_bytes(hex: &str) -> Vec<u8> {
     bytes
 }
 
+// Function to turn a given string into some bytes.
+pub fn string_to_bytes(string: &str) -> Vec<u8> {
+    // Create a new vector to store the bytes in.
+    let mut bytes: Vec<u8> = Vec::new();
+
+    // Loop through the string, one character at a time.
+    for i in 0..string.len() {
+        // Get the character.
+        let character = &string[i..i + 1];
+
+        // Convert the character to a byte.
+        let byte = character.as_bytes()[0];
+
+        // Add the byte to the vector.
+        bytes.push(byte);
+    }
+
+    // Return the vector.
+    bytes
+}
+
 // Function to print a byte array as a hex string.
 pub fn bytes_to_hex_string(bytes: &[u8]) -> String {
     // Create a new string to store the hex in.
@@ -49,14 +70,14 @@ pub fn bytes_to_hex_string(bytes: &[u8]) -> String {
 }
 
 // XOR two byte arrays together.
-pub fn xor_bytes(bytes1: &[u8], bytes2: &[u8]) -> Vec<u8> {
+pub fn xor(bytes1: &[u8], bytes2: &[u8]) -> Vec<u8> {
     // Create a new vector to store the bytes in.
     let mut bytes: Vec<u8> = Vec::new();
 
     // Loop through the bytes.
     for i in 0..bytes1.len() {
         // XOR the bytes together.
-        let byte = bytes1[i] ^ bytes2[i];
+        let byte = bytes1[i] ^ bytes2[i % bytes2.len()];
 
         // Add the byte to the vector.
         bytes.push(byte);
