@@ -51,6 +51,24 @@ pub fn string_to_bytes(string: &str) -> Vec<u8> {
     bytes
 }
 
+// Function to turn a given byte array into a string.
+pub fn bytes_to_string(bytes: &[u8]) -> String {
+    // Create a new string to store the bytes in.
+    let mut string = String::new();
+
+    // Loop through the bytes, one byte at a time.
+    for byte in bytes {
+        // Convert the byte to a character.
+        let character = *byte as char;
+
+        // Add the character to the string.
+        string.push(character);
+    }
+
+    // Return the string.
+    string
+}
+
 // Function to print a byte array as a hex string.
 pub fn bytes_to_hex_string(bytes: &[u8]) -> String {
     // Create a new string to store the hex in.
